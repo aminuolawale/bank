@@ -6,15 +6,15 @@ import (
 	"os"
 	"testing"
 
+	_ "github.com/aminuolawale/bank/util"
 	_ "github.com/lib/pq"
 )
 
 
 var testQueries *Queries
-const (
-	dbDriver = "postgres"
-	dbSource = "postgresql://root:Comaberenices8@localhost:5431/simple_bank?sslmode=disable"
-)
+var	dbDriver = os.Getenv("POSTGRES_DB_DRIVER")
+var	dbSource = os.Getenv("POSTGRES_DB_SOURCE")
+
 
 
 func TestMain(m *testing.M){

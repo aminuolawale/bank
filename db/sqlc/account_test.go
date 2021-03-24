@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func createRandomAccount(t * testing.T)Account{
+func CreateRandomAccount(t * testing.T)Account{
 	arg:= CreateAccountParams{
 		Owner: util.RandomOwner(), 
 		Balance: util.RandomMoney(), 
@@ -29,11 +29,11 @@ func createRandomAccount(t * testing.T)Account{
 }
 
 func TestCreateAccount(t *testing.T){
-	createRandomAccount(t)
+	CreateRandomAccount(t)
 }
 
 func TestGetAccount(t *testing.T){
-	arg := createRandomAccount(t)
+	arg := CreateRandomAccount(t)
 	account, err := testQueries.GetAccount(context.Background(),arg.ID)
 	require.NoError(t, err)
 	require.NotEmpty(t, account) 
@@ -45,7 +45,7 @@ func TestGetAccount(t *testing.T){
 
 
 func TestUpdateAccount(t *testing.T){
-	testAccount:= createRandomAccount(t)
+	testAccount:= CreateRandomAccount(t)
 	arg := UpdateAccountParams{ID:testAccount.ID, Balance:util.RandomMoney()}
 	account, err := testQueries.UpdateAccount(context.Background(), arg)
 	require.NoError(t, err)
@@ -59,7 +59,7 @@ func TestUpdateAccount(t *testing.T){
 
 
 func TestDeleteAccount(t *testing.T){
-	testAccount:= createRandomAccount(t)
+	testAccount:= CreateRandomAccount(t)
 	err := testQueries.DeleteAccount(context.Background(), testAccount.ID)
 	require.NoError(t, err)	
 	account, err := testQueries.GetAccount(context.Background(), testAccount.ID)
@@ -71,7 +71,7 @@ func TestDeleteAccount(t *testing.T){
 
 func TestGetAccounts (t  *testing.T){
 	for i:=0; i< 10; i++{
-		createRandomAccount(t)
+		CreateRandomAccount(t)
 	}
 	arg := GetAccountsParams{
 		Limit:5, Offset:5,
